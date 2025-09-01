@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/gstat.dir/main.cpp.o -o gstat  /usr/lib/x86_64-linux-gnu/libcurl.so 
