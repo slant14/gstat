@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
+#include <nlohmann/json.hpp>
 
-
-static size_t WriteCallBack(void* contents, size_t size, size_t nmemb, void* userdata) {
+static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userdata) {
 
     size_t total_size = size * nmemb;
     static_cast<std::string*>(userdata)->append(static_cast<char*>(contents), total_size);
@@ -33,9 +33,23 @@ int main() {
         res = curl_easy_perform(curl);
 
         if(res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+           std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
         } else {
-            std::cout << "Received data:\n" << readBuffer << std::endl;
+            try {
+                nlohmann::json data = nlohmann::json::parse(readBuffer);
+                std::cout << "Number of followers: " << data.size() << std::endl;
+
+                for (const auto& follower : data) {
+                    std::string username = follower["login"];
+                    std::string url = follower["html_url"];
+                    std::cout << " - " << username << " (" << url << ")" << std::endl;
+                }
+            
+            } catch (const std::exception& e) {
+                std::cerr << "Failed to parse JSON: " << e.what() << std::endl;
+            }
+
+
         }
 
         curl_easy_cleanup(curl);
