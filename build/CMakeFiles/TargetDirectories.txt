@@ -1,3 +1,5 @@
 /home/mahmoud/Documents/gstat/build/CMakeFiles/gstat.dir
 /home/mahmoud/Documents/gstat/build/CMakeFiles/edit_cache.dir
 /home/mahmoud/Documents/gstat/build/CMakeFiles/rebuild_cache.dir
+/home/mahmoud/Documents/gstat/build/_deps/json-build/CMakeFiles/edit_cache.dir
+/home/mahmoud/Documents/gstat/build/_deps/json-build/CMakeFiles/rebuild_cache.dir

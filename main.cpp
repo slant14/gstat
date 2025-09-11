@@ -3,6 +3,23 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
+struct request {
+    std::string url;
+    std::string accept;
+    std::string authorization;
+    std::string version;
+    std::string agent;
+};
+
+struct request followers = {
+    url: "https://api.github.com/user/followers",
+    accept: "Accept: application/vnd.github+json",
+    authorization: "Authorization: Bearer ",
+    version: "X-GitHub-Api-Version: 2022-11-28",
+    agent: "User-Agent: My-CPP-App" 
+};
+
+
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userdata) {
 
     size_t total_size = size * nmemb;
